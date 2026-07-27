@@ -1,3 +1,15 @@
+/*CMD
+  command: /onCheckerDelivered
+  help: 
+  need_reply: false
+  auto_retry_time: 
+  folder: AntiAd
+  answer: 
+  keyboard: 
+  aliases: 
+  group: 
+CMD*/
+
 if (!options || !options.result) { return; }
 
 let checkerMsgId = options.result.message_id;
