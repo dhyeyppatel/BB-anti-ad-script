@@ -20,6 +20,7 @@ var bal = User.getProperty("balance") || 0;
 
 if (bal < 5) {
   Api.sendMessage({
+  on_result: "/saveLastBotMessage",
     chat_id: user.telegramid,
     text: "❌ Insufficient balance.\n\n💰 Required: 5\n💳 Your Balance: " + bal
   });

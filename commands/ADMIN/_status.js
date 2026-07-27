@@ -19,12 +19,14 @@ CMD*/
 var admin_id = Bot.getProperty("admin_id");
 
 if (!admin_id || user.telegramid.toString() !== admin_id.toString())
-  return Api.sendMessage({ text: "🚫 Only the bot admin can check status." });
+  return Api.sendMessage({
+  on_result: "/saveLastBotMessage", text: "🚫 Only the bot admin can check status." });
 
 var task_id = Bot.getProperty("broadcast_task_id");
 
 if (!task_id) {
   return Api.sendMessage({
+  on_result: "/saveLastBotMessage",
     text: "❌ No Broadcast Task Found.\nPlease run /broadcast first.",
     reply_to_message_id: request.message_id
   });
@@ -33,6 +35,7 @@ if (!task_id) {
 let task = new RunAllTask({ id: task_id });
 
 Api.sendMessage({
+  on_result: "/saveLastBotMessage",
   text:
     `<b>📊 Broadcast Status</b>\n\n` +
     `<b>🆔 Task ID:</b> <code>${task.id}</code>\n` +

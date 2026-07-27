@@ -16,6 +16,7 @@ CMD*/
 var caption = "Send screenshot after payment to @CThreadpaybot only."
 
 Api.sendPhoto({
+  on_result: "/saveLastBotMessage",
   chat_id: user.telegramid,
   photo: "https://ar-hosting.pages.dev/1767775741427.png",
   caption: caption,

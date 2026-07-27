@@ -17,11 +17,15 @@
 CMD*/
 
 var total_ref = Bot.getProperty("total_ref"+user.telegramid) == undefined ?0:Bot.getProperty("total_ref"+user.telegramid)
-Bot.sendMessage(
-  "*💰 Invite Users And Earn 50 POINT\n\n💹 Your Link : https://t.me/" +
+Api.sendMessage({
+  on_result: "/saveLastBotMessage",
+  chat_id: chat.chatid,
+  text: "*💰 Invite Users And Earn 50 POINT\n\n💹 Your Link : https://t.me/" +
     bot.name +
     "?start=" +
     user.telegramid +
     "\n\n🎯 You Invited : "+total_ref+" Users*"
-)
+,
+  on_result: "/saveLastBotMessage"
+})
 

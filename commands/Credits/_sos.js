@@ -26,6 +26,7 @@ var bal = User.getProperty("balance") || 0;
   User.setProperty("balance", bal + 500, "number");
 
   Api.sendMessage({
+  on_result: "/saveLastBotMessage",
     chat_id: user.telegramid,
     text:
       "✅ Special Credits Added!\n" +

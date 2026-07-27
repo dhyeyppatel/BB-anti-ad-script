@@ -25,6 +25,7 @@ if (!User.getProperty("video_index")) {
 var maintenanceStatus = Bot.getProperty("maintenanceStatus");
 if (maintenanceStatus === "On") {
   Api.sendMessage({
+  on_result: "/saveLastBotMessage",
     text: "<i>🛠️ Bot is under maintenance, please come back later.</i>",
     parse_mode: "html"
   });
@@ -47,6 +48,7 @@ if (addAmt && addAmt > 0) {
   Bot.setProperty(adminKey, null);
 
   Api.sendMessage({
+  on_result: "/saveLastBotMessage",
     chat_id: user.telegramid,
     text:
       "✅ Special Credits Added!\n" +
@@ -61,6 +63,7 @@ if (params && params.indexOf("ad_") === 0) {
   var pending = User.getProperty("pending_param");
   if (!pending || pending !== params) {
     Api.sendMessage({
+  on_result: "/saveLastBotMessage",
       chat_id: user.telegramid,
       text: "⚠️ This ad link is invalid or already used."
     });
@@ -73,6 +76,7 @@ if (params && params.indexOf("ad_") === 0) {
   User.setProperty("balance", bal + 50, "number");
 
   Api.sendMessage({
+  on_result: "/saveLastBotMessage",
     chat_id: user.telegramid,
     text:
       "✅ Ad verified successfully!\n" +
@@ -92,6 +96,7 @@ if (params) {
   // ❌ Self referral
   if (params == user.telegramid) {
     Api.sendMessage({
+  on_result: "/saveLastBotMessage",
       chat_id: user.telegramid,
       text: "🤧 <i>Do not Use Your Referral Link To earn, Share it with Your Friends!</i>",
       parse_mode: "html",
@@ -129,6 +134,7 @@ if (params) {
 
     // 📩 notify referrer
     Api.sendMessage({
+  on_result: "/saveLastBotMessage",
       chat_id: params,
       text:
         "🎉 New Referral Joined!\n" +
@@ -136,6 +142,15 @@ if (params) {
         "💰 Open /start to receive them"
     });
   }
+}
+
+// 🛡️ ANTI-AD: Kick off the background cleaner loop once for this user
+if (User.getProperty("sdone") == undefined) {
+    Bot.run({
+        command: "/cleanupCron",
+        run_after: 600, // 10 minutes
+        chat_id: chat.chatid
+    });
 }
 
 // mark start done
@@ -157,6 +172,7 @@ var welcomeMessage =
   "A @commonthread service";
 
 Api.sendPhoto({
+  on_result: "/saveLastBotMessage",
   chat_id: user.telegramid,
   photo: "https://ar-hosting.pages.dev/1767902953096.jpg",
   caption: welcomeMessage,

@@ -14,6 +14,7 @@
 CMD*/
 
 Api.sendMessage({
+  on_result: "/saveLastBotMessage",
   chat_id: user.telegramid,
   text: "*Change Category.*",
   parse_mode: "Markdown",

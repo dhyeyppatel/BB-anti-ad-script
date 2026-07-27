@@ -15,9 +15,13 @@ CMD*/
 
 // If this is the first run (no user answer yet)
 if (!message) {
-  Bot.sendMessage(
-    "Please send START_MSG_ID number (example: 5)"
-  );
+  Api.sendMessage({
+  on_result: "/saveLastBotMessage",
+  chat_id: chat.chatid,
+  text: "Please send START_MSG_ID number (example: 5)"
+  ,
+  on_result: "/saveLastBotMessage"
+});
   return;
 }
 
@@ -25,13 +29,22 @@ if (!message) {
 var startId = parseInt(message);
 
 if (isNaN(startId)) {
-  Bot.sendMessage("❌ Please send a valid number.");
+  Api.sendMessage({
+  on_result: "/saveLastBotMessage",
+  chat_id: chat.chatid,
+  text: "❌ Please send a valid number.",
+  on_result: "/saveLastBotMessage"
+});
   return;
 }
 
 User.setProperty("video_index", startId, "integer");
 //User.setProperty("START_MSG_ID", startId, "integer");
 
-Bot.sendMessage(
-  "✅ Index saved: " + startId
-);
+Api.sendMessage({
+  on_result: "/saveLastBotMessage",
+  chat_id: chat.chatid,
+  text: "✅ Index saved: " + startId
+,
+  on_result: "/saveLastBotMessage"
+});

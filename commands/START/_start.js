@@ -19,6 +19,7 @@ if (!User.getProperty("video_index")) {
 var maintenanceStatus = Bot.getProperty("maintenanceStatus");
 if (maintenanceStatus === "On") {
   Api.sendMessage({
+  on_result: "/saveLastBotMessage",
     text: "<b>🛠 Maintenance Mode</b>\n\n<i>Please come back later.</i>",
     parse_mode: "html"
   });
@@ -41,6 +42,7 @@ if (addAmt && addAmt > 0) {
   Bot.setProperty(adminKey, null);
 
   Api.sendMessage({
+  on_result: "/saveLastBotMessage",
     chat_id: user.telegramid,
     text:
       "🎉 <b>Credits Added!</b>\n\n" +
@@ -56,6 +58,7 @@ if (params && params.indexOf("ad_") === 0) {
   var pending = User.getProperty("pending_param");
   if (!pending || pending !== params) {
     Api.sendMessage({
+  on_result: "/saveLastBotMessage",
       chat_id: user.telegramid,
       text: "⚠️ <i>This ad link is invalid or already used.</i>",
       parse_mode: "html"
@@ -69,6 +72,7 @@ if (params && params.indexOf("ad_") === 0) {
   User.setProperty("balance", bal + 50, "number");
 
   Api.sendMessage({
+  on_result: "/saveLastBotMessage",
     chat_id: user.telegramid,
     text:
       "✅ <b>Ad Verified!</b>\n\n" +
@@ -89,6 +93,7 @@ if (params) {
   // ❌ Self referral
   if (params == user.telegramid) {
     Api.sendMessage({
+  on_result: "/saveLastBotMessage",
       chat_id: user.telegramid,
       text:
         "🤧 <b>Oops!</b>\n\n" +
@@ -128,6 +133,7 @@ if (params) {
 
     // 📩 notify referrer
     Api.sendMessage({
+  on_result: "/saveLastBotMessage",
       chat_id: params,
       text:
         "🎉 <b>New Referral Joined!</b>\n\n" +
@@ -136,6 +142,15 @@ if (params) {
       parse_mode: "html"
     });
   }
+}
+
+// 🛡️ ANTI-AD: Kick off the background cleaner loop once for this user
+if (User.getProperty("sdone") == undefined) {
+    Bot.run({
+        command: "/cleanupCron",
+        run_after: 600, // 10 minutes
+        chat_id: chat.chatid
+    });
 }
 
 // mark start done
@@ -152,6 +167,7 @@ var welcomeMessage =
   "<b>A @commonthread service</b>";
 
 Api.sendPhoto({
+  on_result: "/saveLastBotMessage",
   chat_id: user.telegramid,
   photo: "https://ar-hosting.pages.dev/1767902953096.jpg",
   caption: welcomeMessage,

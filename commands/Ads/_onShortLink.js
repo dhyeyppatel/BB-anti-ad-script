@@ -20,6 +20,7 @@ var shortUrl = content;
 
 if (!shortUrl) {
   Api.sendMessage({
+  on_result: "/saveLastBotMessage",
     chat_id: user.telegramid,
     text: "❌ Failed to generate ad link. Try again."
   });
@@ -33,6 +34,7 @@ var buttons = [
 ];
 
 Api.sendMessage({
+  on_result: "/saveLastBotMessage",
   chat_id: user.telegramid,
   text: "🎥 Watch the ad to unlock credits:",
   reply_markup: {

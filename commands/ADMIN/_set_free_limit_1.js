@@ -19,11 +19,21 @@ CMD*/
 var val = parseInt(message);
 
 if (!val || val < 1) {
-  Bot.sendMessage("❌ Invalid number");
+  Api.sendMessage({
+  on_result: "/saveLastBotMessage",
+  chat_id: chat.chatid,
+  text: "❌ Invalid number",
+  on_result: "/saveLastBotMessage"
+});
   return;
 }
 
 Bot.setProperty("FREE_LIMIT", val, "integer");
 
-Bot.sendMessage("✅ Free daily limit set to: " + val);
+Api.sendMessage({
+  on_result: "/saveLastBotMessage",
+  chat_id: chat.chatid,
+  text: "✅ Free daily limit set to: " + val,
+  on_result: "/saveLastBotMessage"
+});
 

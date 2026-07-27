@@ -19,6 +19,7 @@ var bal = User.getProperty("balance");
 if (bal === undefined || bal === null) bal = 0;
 
 Api.sendMessage({
+  on_result: "/saveLastBotMessage",
   chat_id: user.telegramid,
   text: "💰 *Your Current Balance*\n\nCredits: *" + bal + "*",
   parse_mode: "Markdown"

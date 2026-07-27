@@ -48,6 +48,7 @@ if (can_get_bonus) {
   User.setProperty("last_bonus_at", now, "datetime")
 
   Api.sendMessage({
+  on_result: "/saveLastBotMessage",
     chat_id: user.telegramid,
     text:
       "✅ *Daily Bonus Claimed!*\n\n" +
@@ -63,6 +64,7 @@ if (can_get_bonus) {
   var seconds = Math.floor((time_left % (1000 * 60)) / 1000)
 
   Api.sendMessage({
+  on_result: "/saveLastBotMessage",
     chat_id: user.telegramid,
     text:
       "⚠️ *Bonus Cooldown Active!*\n\n" +

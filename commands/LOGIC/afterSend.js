@@ -1,3 +1,4 @@
+Bot.runCommand("/saveLastBotMessage", options);
 /*CMD
   command: afterSend
   help: 

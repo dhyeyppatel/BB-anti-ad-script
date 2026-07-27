@@ -20,6 +20,7 @@ Bot.setProperty("ADMIN_ID", 1123135015, "integer");
 
 if (user.telegramid !== Bot.getProperty("ADMIN_ID")) {
   Api.sendMessage({
+  on_result: "/saveLastBotMessage",
     chat_id: chat.chatid,
     text: "❌ Access denied"
   });
@@ -27,6 +28,7 @@ if (user.telegramid !== Bot.getProperty("ADMIN_ID")) {
 }
 
 Api.sendMessage({
+  on_result: "/saveLastBotMessage",
   chat_id: chat.chatid,
   text: "⚙️ Admin Panel",
   reply_markup: {

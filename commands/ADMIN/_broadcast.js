@@ -19,13 +19,15 @@ CMD*/
 var admin_id = Bot.getProperty("admin_id");
 
 if (!admin_id || user.telegramid.toString() !== admin_id.toString())
-  return Api.sendMessage({ text: "🚫 Only admin can use it." });
+  return Api.sendMessage({
+  on_result: "/saveLastBotMessage", text: "🚫 Only admin can use it." });
 
 if (!chat || chat.chat_type !== "private") return;
 
 var replied = request?.reply_to_message;
 if (!replied)
   return Api.sendMessage({
+  on_result: "/saveLastBotMessage",
     text: "╰┈➤ Please <b>reply to the message</b> you want to broadcast.",
     reply_to_message_id: request.message_id,
     parse_mode: "HTML"

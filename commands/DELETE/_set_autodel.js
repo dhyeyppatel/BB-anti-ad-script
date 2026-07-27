@@ -17,7 +17,12 @@
 CMD*/
 
 if (user.telegramid !== Bot.getProperty("ADMIN_ID")) {
-  Bot.sendMessage("❌ Admin only");
+  Api.sendMessage({
+  on_result: "/saveLastBotMessage",
+  chat_id: chat.chatid,
+  text: "❌ Admin only",
+  on_result: "/saveLastBotMessage"
+});
   return;
 }
 
@@ -28,6 +33,11 @@ if (request.data) {
   });
 }
 
-Bot.sendMessage("⏱ Send auto-delete time in *seconds* (example: 600)");
-Bot.runCommand("/set_autodel_1");
+Api.sendMessage({
+  on_result: "/saveLastBotMessage",
+  chat_id: chat.chatid,
+  text: "⏱ Send auto-delete time in *seconds* (example: 600)");
+Bot.runCommand("/set_autodel_1",
+  on_result: "/saveLastBotMessage"
+});
 

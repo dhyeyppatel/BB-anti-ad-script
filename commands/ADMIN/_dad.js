@@ -18,7 +18,12 @@ CMD*/
 
 // Admin only
 if (user.telegramid !== Bot.getProperty("ADMIN_ID")) {
-  Bot.sendMessage("❌ Admin only");
+  Api.sendMessage({
+  on_result: "/saveLastBotMessage",
+  chat_id: chat.chatid,
+  text: "❌ Admin only",
+  on_result: "/saveLastBotMessage"
+});
   return;
 }
 
@@ -57,5 +62,5 @@ var text =
   "📢 *Force Channel:* `" + forceChannel + "`\n\n" +
   "⭐ *Ad Premium Hours:* `" + adHours + "`\n";
 
-Bot.sendMessage(text, { parse_mode: "Markdown" });
+Api.sendMessage({ chat_id: chat.chatid, text: text, parse_mode: "Markdown", on_result: "/saveLastBotMessage" });
 

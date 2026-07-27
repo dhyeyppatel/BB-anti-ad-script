@@ -19,11 +19,21 @@ CMD*/
 var val = parseInt(message);
 
 if (!val || val < 0) {
-  Bot.sendMessage("❌ Invalid number. Try again.");
+  Api.sendMessage({
+  on_result: "/saveLastBotMessage",
+  chat_id: chat.chatid,
+  text: "❌ Invalid number. Try again.",
+  on_result: "/saveLastBotMessage"
+});
   return;
 }
 
 Bot.setProperty("AUTO_DELETE", val, "integer");
 
-Bot.sendMessage("✅ Auto-delete time set to: " + val + " seconds");
+Api.sendMessage({
+  on_result: "/saveLastBotMessage",
+  chat_id: chat.chatid,
+  text: "✅ Auto-delete time set to: " + val + " seconds",
+  on_result: "/saveLastBotMessage"
+});
 

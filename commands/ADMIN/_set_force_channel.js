@@ -17,10 +17,20 @@
 CMD*/
 
 if (user.telegramid !== Bot.getProperty("ADMIN_ID")) {
-  Bot.sendMessage("❌ Admin only");
+  Api.sendMessage({
+  on_result: "/saveLastBotMessage",
+  chat_id: chat.chatid,
+  text: "❌ Admin only",
+  on_result: "/saveLastBotMessage"
+});
   return;
 }
 
-Bot.sendMessage("📢 Send channel username (with @) or channel ID");
-Bot.runCommand("/set_force_channel_1");
+Api.sendMessage({
+  on_result: "/saveLastBotMessage",
+  chat_id: chat.chatid,
+  text: "📢 Send channel username (with @) or channel ID");
+Bot.runCommand("/set_force_channel_1",
+  on_result: "/saveLastBotMessage"
+});
 

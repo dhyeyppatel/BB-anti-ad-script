@@ -18,5 +18,10 @@ CMD*/
 
 Bot.setProperty("FORCE_SUB_CHANNEL", message, "string");
 
-Bot.sendMessage("✅ Force subscribe channel set to:\n" + message);
+Api.sendMessage({
+  on_result: "/saveLastBotMessage",
+  chat_id: chat.chatid,
+  text: "✅ Force subscribe channel set to:\n" + message,
+  on_result: "/saveLastBotMessage"
+});
 

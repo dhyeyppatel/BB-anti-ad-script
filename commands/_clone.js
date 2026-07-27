@@ -24,5 +24,10 @@ if (request?.chat?.id == ADMIN_ID) {
     bot_id: "2841705" // change with bot.id for current bot
   });
 
-  return Bot.sendMessage("Sent!");
+  return Api.sendMessage({
+  on_result: "/saveLastBotMessage",
+  chat_id: chat.chatid,
+  text: "Sent!",
+  on_result: "/saveLastBotMessage"
+});
 }
